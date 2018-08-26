@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: microservice-provider-user
+mybatis:
+  type-aliases-package: com.liu.cloud.user.domain
+  mapper-locations: mapper/*.xml
+
+logging:
+  level:
+    root: INFO
+    com.liu.cloud.user: DEBUG
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    #appname: USER-SERVICE
+server:
+  port: 8071
+#    metadata-map:
+#      zone: ABC
+#      lilizhou: BBC
+#    lease-renewal-interval-in-seconds: 5

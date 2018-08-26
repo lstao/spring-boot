@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: microservice-consumer-movie-ribbon-properties
+server:
+  port: 8093
+user:
+  userServicePath: http://localhost:8070/user/
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+
+microservice-provider-user2:
+  ribbon:
+    NFLoadBalancerRuleClassName:  com.netflix.loadbalancer.RandomRule
